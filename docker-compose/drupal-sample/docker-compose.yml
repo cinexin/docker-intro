@@ -11,8 +11,13 @@ services:
     ports:
     - 8080:80
     volumes:
-    - /var/www/html/modules
-    - /var/www/html/profiles
-    - /var/www/html/themes
-    - /var/www/html/sites
+    - drupal-modules:/var/www/html/modules
+    - drupal-profiles:/var/www/html/profiles
+    - drupal-sites:/var/www/html/sites
+    - drupal-themes:/var/www/html/themes
     restart: always
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
