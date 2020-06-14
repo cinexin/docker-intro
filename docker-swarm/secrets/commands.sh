@@ -1,0 +1,9 @@
+# Create secrets..
+docker secret create psql_user psql_user.txt
+echo "mydbpassword" | docker secret create psql_mydbpass -
+# List secrets...
+docker secret ls
+# Inspect secrets...
+docker inspect psql_mydbpass
+# Usage in create service command....
+docker service create --name psql --secret psql_user --secret psql_mydbpass -e POSTGRES_PASSWORD_FILE=/run/secrets/psql_mydbpass -e POSTGRES_USER_FILE=/run/secrets/psql_user postgres
