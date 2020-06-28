@@ -4,6 +4,12 @@ kubectl run my-nginx --image nginx
 # Run a temporary shell in cluster
 kubectl run --generator run-pod/v1 tmp-shell --rm -it --image bretfisher/netshoot -- bash
 
+# Run and expose in the same command
+kubectl run test --image nginx --port 80 --expose
+
+# Run a cron job in Kubernetes
+kubectl run test --image nginx --schedule "*/1 * * * *"
+
 # Get running pods
 kubectl get pods
 kubectl get pods -w
@@ -47,6 +53,16 @@ kubectl expose deployment/httpenv --port 8888 --name httpenv-lb --type LoadBalan
 
 # Get exposed services
 kubectl get service
+
+# Generators
+# --dry-run flag is used to preview the object that would be sent to the cluster, without really submitting it
+# -o flag is to output the specification yo a YAML file
+## Generate a deployment spec file
+kubectl create deployment test --image nginx --dry-run -o yaml
+## Generate a job spec file (a job is process that it's removed when it's done)
+kubectl create job test --image nginx --dry-run -o yaml
+## Expose an existing deployment
+kubectl expose deployment/test --port 80 --dry-run -o yaml
 
 # Minikube DNS issue (Win)
 set NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24
