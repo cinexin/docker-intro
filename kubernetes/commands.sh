@@ -64,6 +64,20 @@ kubectl create job test --image nginx --dry-run -o yaml
 ## Expose an existing deployment
 kubectl expose deployment/test --port 80 --dry-run -o yaml
 
+# List all possible Kubernetes resources in our server
+kubectl api-resources
+
+# List all API versionos in our server
+kubectl api-versions
+
+# List all keys supported in YAML files for an specific object
+kubectl explain pods --recursive
+kubectl explain services --recursive
+kubectl explain deployments --recursive
+## List with descriptions
+kubectl explain services.spec
+kubectl explain services.spec.type
+
 # Minikube DNS issue (Win)
 set NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24
 minikube start --kubernetes-version='1.17.4'
